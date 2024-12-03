@@ -12,16 +12,19 @@ export default function CreateTodo({ onAddTodo }) {
     }
     try {
       setLoading(true);
-      const response = await fetch(`${url}/add`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          description,
-        }),
-      });
+      const response = await fetch(
+        `http://localhost:8080/todo/show/add`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            description,
+          }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to add todo");
       }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import url from "../../confic/confic";
+// import url from "../../confic/confic";
 
 export default function Todos({ todos, onUpdateTodo, onDeleteTodo }) {
   const [loadingId, setLoadingId] = useState(null);
@@ -7,15 +7,18 @@ export default function Todos({ todos, onUpdateTodo, onDeleteTodo }) {
   const markAsDone = async (id) => {
     try {
       setLoadingId(id);
-      const response = await fetch(`${url}/mark/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          completed: true,
-        }),
-      });
+      const response = await fetch(
+        `http://localhost:8080/todo/show/mark/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            completed: true,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to add todo");

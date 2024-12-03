@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CreateTodo from "./components/CreateTodo";
 import Todos from "./components/Todos";
-import url from "../confic/confic";
+// import url from "../confic/confic";
 
 function App() {
   const [todos, setTodo] = useState([]);
@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-        const response = await fetch(`${url}/show`);
+        const response = await fetch(`http://localhost:8080/todo/show/show`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
