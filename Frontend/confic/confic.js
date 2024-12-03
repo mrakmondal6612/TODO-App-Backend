@@ -1,2 +1,2 @@
-const url = "https://todo-app-backend-lovat.vercel.app/";
+const url = "http://localhost:8080/todo";
 export default url;
