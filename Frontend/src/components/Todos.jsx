@@ -8,7 +8,7 @@ export default function Todos({ todos, onUpdateTodo, onDeleteTodo }) {
     try {
       setLoadingId(id);
       const response = await fetch(
-        `http://localhost:8080/todo/show/mark/${id}`,
+        `http://localhost:8080/todo/mark/${id}`,
         {
           method: "PUT",
           headers: {
