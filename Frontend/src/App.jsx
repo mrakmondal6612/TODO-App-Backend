@@ -5,6 +5,7 @@ import Todos from "./components/Todos";
 
 function App() {
   const [todos, setTodo] = useState([]);
+  const [render, setRender] = useState(0);
 
   // Fetch todos on component mount
   useEffect(() => {
@@ -21,13 +22,14 @@ function App() {
       }
     };
     fetchTodo();
-  }, []);
+  }, [render]);
 
   // Function to update a specific todo
   const handleUpdateTodo = (updateTodo) => {
     setTodo((prevTodos) =>
       prevTodos.map((t) => (t._id === updateTodo._id ? updateTodo : t))
     );
+    setRender(1);
   };
 
   // Function to delete a todo
@@ -38,6 +40,7 @@ function App() {
   return (
     <>
       <CreateTodo
+        rendering={(render) => setRender((r) => r=r+1)}
         onAddTodo={(newTodo) => setTodo((prev) => [...prev, newTodo])}
       />
       <Todos

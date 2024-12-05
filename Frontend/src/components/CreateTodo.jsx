@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import url from "../../confic/confic";
 
-export default function CreateTodo({ onAddTodo }) {
+export default function CreateTodo({ onAddTodo, rendering }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,11 +26,12 @@ export default function CreateTodo({ onAddTodo }) {
         throw new Error("Failed to add todo");
       }
       const newTodo = await response.json();
-      alert("Todo added succesfully");
+      alert("Todo added successfully");
 
       // Notify parent component
       onAddTodo(newTodo);
 
+      // Clear input fields
       setTitle("");
       setDescription("");
     } catch (er) {
@@ -38,8 +39,10 @@ export default function CreateTodo({ onAddTodo }) {
       alert("Failed to add todo. Please try again later.");
     } finally {
       setLoading(false);
+      rendering(1);
     }
   };
+
   return (
     <div>
       <input
@@ -50,10 +53,11 @@ export default function CreateTodo({ onAddTodo }) {
         }}
         type="text"
         placeholder="title"
+        value={title} // Bind input to state
         onChange={(e) => {
           setTitle(e.target.value);
         }}
-      ></input>
+      />
       <br />
       <input
         id="desc"
@@ -63,10 +67,11 @@ export default function CreateTodo({ onAddTodo }) {
         }}
         type="text"
         placeholder="description"
+        value={description} // Bind input to state
         onChange={(e) => {
           setDescription(e.target.value);
         }}
-      ></input>
+      />
       <br />
       <button
         style={{
